@@ -1,0 +1,50 @@
+uname - Print the system information
+
+$uname -srm
+
+-s Kernel name
+
+-r Kernel release
+
+-m machine hardware name
+
+5 - Kernel Version.
+14 - Major Revision.
+0 - Minor Revision.
+70 - Patch number.
+generic - Distribution specific information.
+
+
+Kernel Source Files
+------------------
+$cd /lib/modules
+
+
+Making a Patch FIle
+-------------------
+$diff -u working/slang.c latest/slang.c > slang.patch
+
+$patch -u working/slang.c -i slang.patch
+
+The diff command examines two different versions of a file and lists the differences between them. The differences can be stored in a file called a patch file.
+
+The patch command can read a patch file and use the contents as a set of instructions. By following those instructions, the changes in the modified file are replicated in the original file.
+
+diff is the,
+
+-u (unified context) 
+
+-r (recursive) option to make diff look into any sub-directories 
+
+-N (new file) option.
+
+$diff -ruN working/ latest/ > slang.patch
+
+
+Kernel Configuration
+---------------------
+
+Kernel Building
+---------------
+https://phoenixnap.com/kb/build-linux-kernel
+

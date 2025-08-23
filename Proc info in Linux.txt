@@ -1,0 +1,83 @@
+proc file system (procfs) in Linux
+----------------------------------
+It is a virtual file system created on when the system boots and is dissolved at the time of system shutdown.
+
+It contains useful information about the processes that are currently running.
+
+The proc file system also provides a communication medium between kernel space and user space.
+
+To List all the files and directories under the /proc directory
+$ls -l /proc
+
+Detailed information like permissions, ownership, size, and time of modifications.
+
+
+***To view the information of a specific process assigned a PID***
+
+$ps -aux
+
+$ls -ltr /proc/3151
+
+$ls -ltr /proc/31154/status
+
+
+
+***Directories in /proc in Linux***
+Directory			Description
+---------			-----------
+/proc/PID/cmdline	Command line arguments
+
+/proc/PID/cpu		Current and last cpu in which it was executed.
+
+/proc/PID/cwd		Link to the current working directory.
+
+/proc/PID/environ	Values of environment variables.
+
+/proc/PID/exe		Link to the executable of this process.
+
+/proc/PID/fd		Directory, which contains all file descriptors.
+
+/proc/PID/maps		Memory maps to executables and library files.
+
+/proc/PID/mem		Memory held by this process.
+
+/proc/PID/root		Link to the root directory of this process.
+
+/proc/PID/stat		Process status.
+
+/proc/PID/statm		Process memory status information.
+
+/proc/PID/status	Process status in human readable form.
+
+
+
+***Files in /proc file system***
+File				Description
+----				------------
+/proc/crypto		list of available cryptographic modules
+
+/proc/diskstats		information (including device numbers) for each of the logical disk devices
+
+/proc/filesystems	list of the file systems supported by the kernel at the time of listing
+
+/proc/kmsg		holding messages output by the kernel
+
+/proc/meminfo		summary of how the kernel is managing its memory
+
+/proc/scsi		information about any devices connected via a SCSI or RAID controller
+
+/proc/tty		information about the current terminals
+
+/proc/version		containing the Linux kernel version, distribution number, gcc version number 				(used to build the kernel) and any other pertinent information relating to the 				version of the kernel currently running
+
+
+How can we view System Uptime?
+$cat /proc/uptime
+
+How can we view system memory information?
+$cat /proc/meminfo
+
+How can we view system processor information?
+$cat /proc/cpuinfo
+
+

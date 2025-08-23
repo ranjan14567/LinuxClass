@@ -1,0 +1,73 @@
+Run Levels in Linux
+-------------------
+A run level is a state of init and the whole system defines what system services are operating. 
+
+Run levels are identified by numbers. 
+
+Whenever a LINUX system boot, firstly the init process is started which is actually responsible for running other start scripts which mainly involves initialization of your hardware, bringing up the network, and starting the graphical interface.
+
+****
+"init" is the first process to start when a computer boots up and runs until the system shuts down. 
+
+init stands for initialization. 
+****
+
+Seven different runlevels :
+
+Runlevel	Description
+--------        ------------
+0		System halt i.e., the system can be safely powered off with no activity.
+
+1		Single user mode.
+
+2		Multiple user mode with no NFS (network file system).
+
+3		Multiple user modes under the command line interface and not under the graphical user 			interface.
+
+4		User-definable.
+
+5		Multiple user mode under GUI (graphical user interface) and this is the standard 			runlevel for most of the LINUX-based systems.
+
+6		Reboot which is used to restart the system.
+
+
+By default, most of the LINUX-based system boots to runlevel 3 or runlevel 5.
+
+Users can modify the preset runlevels or even create new ones according to the requirement. 
+
+Runlevels 2 and 4 are used for user-defined runlevels 
+
+and runlevel 0 and 6 are used for halting and rebooting the system.
+
+Each run level will be different performing different tasks. 
+
+How to check Runlevel of our Linux system?
+#runlevel
+
+#who -r
+
+How to Change the Runlevel in Linux?
+init is the program responsible for altering the run level which can be called using the 
+"telinit" command.
+
+To change the system to runlevel 3, you would use the following command:
+$sudo init 3
+
+To change a runlevel from 3 to runlevel 5 which will actually allow the GUI to be started in multi-user mode the telinit command can be used as:
+
+$sudo telinit 5
+
+*****
+Each run level can be found in special files present under rc subdirectories. 
+
+At /etc/rc.d directory there will be either a set of files named rc.0, rc.1, rc.2, rc.3, rc.4, rc.5, and rc.6, or a set of directories named rc0.d, rc1.d, rc2.d, rc3.d, rc4.d, rc5.d, and rc6.d. 
+
+For example, run level 1 will have its start script either in file /etc/rc.d/rc.1 or any files in the directory /etc/rc.d/rc1.d.
+
+run commands
+resource control
+run control
+runtime configuration
+
+*****
+

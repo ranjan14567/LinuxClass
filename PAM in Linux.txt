@@ -1,0 +1,54 @@
+PAM in Linux (Pluggable Authentication Modules)
+------------
+It is used to dynamically authenticate a user to applications (or services) in a Linux system.
+
+PAM is used by major commercial UNIX flavors such as AIX, HP-UX and Solaris and distributions of Linux also implement PAM.
+
+System administrator, use how PAM configuration file(s) define the connection between applications (services) and the pluggable authentication modules (PAMs) that perform the actual authentication tasks.
+
+PAM has alter the security of your Linux system.
+
+For instance an accidental deletion of a configuration file(s) under /etc/pam.d/* 
+
+and /etc/pam.conf can lock you out of your own system!
+
+
+
+**Quotas**
+----------
+It is a Linux utility that allows you to view and set disk quotas for users and groups on a filesystem. 
+
+Disk quotas are used to limit the amount of disk space and number of inodes that a user or group can consume on a filesystem.
+
+$quota --version
+
+Enable both user- (usrquota) and group-based (grpquota) quotas on the filesystem.
+
+Linux administrators always put a quota on the maximum storage usage for users, as well as other user environment limits like max number of processes and open files.
+
+File servers that allow many users to connect and store data, as it ensures that no particular user can utilize an unexpected amount of storage and interrupt storage or processes on the server by making it run out of disk space. 
+
+
+$cat /etc/fstab
+
+Fstab is your operating system's file system table
+
+Anytime a specific device was plugged in, it should be automatically mounted in a specific place.
+
+
+***NIS Intro***
+Network Information Service
+
+Five daemons are utilized in order to provide the NIS service:
+
+Daemon		Function
+------		---------
+ypserv		Server process
+
+ypbind		Binding process 
+
+ypxfrd		High-speed map transfer 
+
+rpc.yppasswdd	NIS password update daemon
+ 
+rpc.ypupdated	Modifies other maps such as publickey 

@@ -1,0 +1,49 @@
+sysctl Command
+--------------
+sysctl command to read or modify kernel parameters at runtime.
+
+Linux administrators use to control and modify networking, I/O operations, and memory management settings in real-time, without performing a reboot, is essential for high-availability systems.
+
+sysctl command syntax:
+sysctl [options] [variable[=value] ...]
+
+**Details**
+sysctl - The command name.
+
+[options] - The command accepts optional flags to customize the behavior.
+
+[variable] - The name of the kernel parameter you want sysctl to read or modify. Enter a variable without a value to read the current value of the variable only.
+
+[=value] - If the command contains a variable, you can assign a value to the variable. Entering a value will set the new value for the variable.
+
+... - The three full stops mean it's possible to specify multiple variable=value pairs in a single sysctl command.
+
+OPTION			DESCRIPTION
+------			------------
+-a		Display all variables and values.
+
+-n		Display only values for specified variables.
+
+-e		Do not display errors for non-existent variables.
+
+-w 		[parameter]=[value]	Change the value for the specified variable.
+
+-p 		[file]	Load values from the specified configuration file. The system loads values from 		the /etc/sysctl.conf file by default if no file is provided.
+
+-q		Error messages for stdout kernel parameter values are suppressed.
+
+-f		Load settings from all system configuration files.
+
+-r 		[pattern] Only list variables that match the defined pattern.
+
+-V		Display the sysctl version.
+
+Show All Kernel Parameters
+$sysctl -a
+
+Display Parameter Names without Values
+$sysctl -a -N
+
+Search for Specific Parameters
+$sudo sysctl -a | grep net.ipv6.route
+

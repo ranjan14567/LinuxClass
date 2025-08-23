@@ -1,0 +1,91 @@
+If you are the only person who uses the disk, there is no need to implement quota at all. 
+
+However if multiple users use the same disk, quotas are the best way to control the individual users from monopolizing entire disk space. 
+
+A user limited by disk quotas cannot use additional disk space beyond his limit. 
+
+For example suppose there are four users; User A, User B, User C, and User D. 
+
+Without quota any user can use the entire disk space, leaving no space for other users.
+
+Implementing a disk quota will prevent users or groups from using too much storage space on a Linux system.
+
+Linux administrators should always put a quota on the maximum storage usage for users, as well as other user environment limits like max number of processes and open files.
+
+How to Install Disk Quota on Linux,
+$sudo dnf install disk quota
+
+Using Disk Quota on Linux,
+$sudo vi /etc/fstab
+
+/dev/sda1       /home   ext4 defaults,usrquota,grpquota 0 2
+
+Need to remount the file system for the changes to take effect. 
+Alternatively, rebooting the system will also work.
+$ sudo mount -o remount,rw /home
+
+Let’s create a quota index for the mount point. 
+In our case, this would be /home. 
+We will include options -c to create a new index, -m so to avoid mounting the partition as read-only, 
+and -u to specify that we want to create a quota for users.
+$ sudo quotacheck -cmu /home
+
+Turn on the quota:
+$ sudo quotaon -v /home
+
+We will use the edquota command to begin putting quotas for individual users.
+$ sudo edquota -u linuxconfig
+
+Here is what each column means:
+blocks – the number of blocks (1k each) currently used by the user.
+soft – the soft maximum number of 1k blocks the user is allowed to use.
+hard – the hard maximum number of 1k blocks the user is allowed to use.
+inodes – the current number of inodes used by the user.
+soft – the soft maximum number of inodes the user is allowed to use.
+hard – the hard maximum number of inodes the user is allowed to use.
+
+With our soft and hard limits set, we can control the grace period of our soft limits with the following command:
+$ sudo edquota -t
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Here are some examples for setting disk quotas and seeing disk quota information on Linux:
+
+Set the disk quota for user linuxconfig:
+$ sudo edquota -u linuxconfig /home
+
+Set the disk quota for group developers:
+$ sudo edquota -g developers /home
+
+See the current quota settings for user linuxconfig on mount point /home:
+$ sudo quota -u linuxconfig /home
+
+Begin enforcing disk quota settings:
+$ sudo quotaon -v /home
+
+Turning off disk quotas:
+$ sudo quotaoff -v /home
+
+To copy disk quota settings from user linuxconfig1 to user linuxconfig2:
+$ sudo edquota -p linuxconfig1 linuxconfig2
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+***NIS Intro***
+Network Information Service
+
+Five daemons are utilized in order to provide the NIS service:
+
+Daemon		Function
+------		---------
+ypserv		Server process
+
+ypbind		Binding process 
+
+ypxfrd		High-speed map transfer 
+
+rpc.yppasswdd	NIS password update daemon
+ 
+rpc.ypupdated	Modifies other maps such as publickey 
+
