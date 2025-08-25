@@ -1,0 +1,96 @@
+***Cron***
+
+Crontab uses a daemon, crond, which runs in the background to check the interval if any of the scheduled jobs need to be executed
+
+yum install cronie -y
+
+systemctl status crond
+
+crontab -l [To show all the current jobs]
+
+crontab -e [To Edit/ADD the jobs]
+
+Crontab Expression:
+-------------------
+Minute (0-59) 
+Hour (0-24) 
+Day of Month (1-31) 
+Month of Year (1-12)  
+Day of Week  (0-6) 
+
+*/1 * * * * /home/ranjan/tscript.sh
+
+55 09 * * * ./tscript.sh
+
+tail -f /var/log/cron
+
+$cd /etc
+$ls -la | grep -i cron
+
+https://crontab.cronhub.io/
+
+
+***Anacron***
+Anacron is a Linux utility that executes scheduled tasks/jobs periodically, even if the computer/system is not running at that moment.
+
+/etc/anacrontab
+
+$rpm -qa | grep anacron [Redhat/Centos]
+
+$dpkg -l | grep anacron [Ubuntu]
+
+$yum install anacron
+
+$apt install anacron
+
+$sudo vi /etc/anacrontab
+15 5 backup_trigger /tmp/backup.sh
+:wq
+
+$cat backup.sh
+#!/bin/bash
+echo "Backup Successful" >> /tmp/output.sh
+
+
+$anacron -f -d 
+-f = Forcefully
+-d = Debugg
+
+$anacron -fdn
+
+-n = now
+
+$ cd /var/log
+
+$sudo less cron
+
+
+
+
+***at***
+Schedule a job only once, executed the commands at a specified time.
+
+Service is "atd"
+
+Syntax:
+at HH:MM
+atq - List at jobs
+atrm <job_ID> - Remove a job
+
+$at 06:13
+at>echo "hello" > hello.txt
+at> ctrl+d
+$atq
+$ls -lrt
+
+
+***batch***
+batch command is used to read commands from standard input.
+
+Execute the commands when system load levels permit.
+
+$batch
+
+
+
+

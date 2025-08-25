@@ -1,0 +1,33 @@
+FTP (File Transfer Protocol) is a standard network protocol used to transfer files to and from a remote network.
+
+$ftp <ip address>
+
+ftp port number : 21
+
+***FTP commands***
+
+cd - change directory on the remote machine.
+
+lcd - change directory on the local machine.
+
+ls - list the names of the files and directories in the current remote directory.
+
+mkdir - create a new directory within the current remote directory.
+
+pwd - print the current working directory on the remote machine.
+
+delete - remove a file in the current remote directory.
+
+rmdir- remove a directory in the current remote directory.
+
+get - copy one file from the remote to the local machine.
+
+mget - copy multiple files from the remote to the local machine.
+
+put - copy one file from the local to the remote machine.
+
+mput - copy multiple files from the local to the remote machine.
+
+ftp > get backup.zip
+
+ftp > quit
