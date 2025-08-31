@@ -1,0 +1,84 @@
+***Send email***
+Postfix and mailx Setup on Linux 
+Edit configuration for Google SMTP
+How to send an email
+How to attach a file in an email
+
+
+Follow the Steps:
+$rpm -qa | grep postfix
+
+$yum install postfix
+
+$rpm -qa | grep mailx
+
+$yum install mailx
+
+Postfix Configuration,
+/etc/postfix/main.cf
+
+Take backup before editing,
+$cp main.cf main.cf_bkp
+
+$vim main.cf
+relayhost = [smtp.gmail.com]:587
+myhostname = <your_hostname>
+
+:wq
+
+#hostname -f  //get it the hostname
+
+Location of sasl_passwd we saved
+smtp_sasl_password_maps = hash:/etc/postfix/sasl/sasl_passwd
+
+Enables SASL authentication for postfix
+smtp_sasl_auth_enable = yes
+smtp_tls_security_level = encrypt
+
+Disallow methods that allow anonymous authentication
+smtp_sasl_security_options = noanonymous
+
+:wq
+
+Create a file under /etc/postfix/sasl/
+$cd /etc/postfix
+$mkdir sasl
+$cd sasl
+$touch sasl_passwd
+$ls
+
+Filename: sasl_passwd
+
+vim sasl_passwd
+#Add the below line
+[smtp.gmail.com]:587 gmail_id:password
+:wq
+
+
+Convert the sasl_passwd file into db file,
+cd /etc/postfix/sasl/
+postmap sal_passwd
+
+or 
+
+postmap /etc/postfix/sasl/sal_passwd
+
+$ls -ltr
+$chmod 600 *
+
+Start the Postfix Service,
+systemctl start/enable/stop/disable/restart postfix
+
+systemctl start postfix
+
+systemctl status postfix
+
+How to send email,
+echo "Test Mail" | mail -s "Postfix TEST" email_id
+
+echo "Test Mail" | mail -s "Postfix TEST" -a testfile email_id
+
+-s = Subject ,-a = attach 
+
+Check the logs,
+$less /var/log/maillog

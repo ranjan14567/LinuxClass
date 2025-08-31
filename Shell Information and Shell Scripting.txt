@@ -1,0 +1,130 @@
+SHELL:
+-----
+The shell is the Linux command line interpreter. 
+
+It provides an interface between the user and the kernel and executes programs called commands.
+
+For example, if a user enters "ls" or "cat" then the shell executes the "ls" or "cat" command.
+
+There are different types of shells in  Linux such as 
+
+ >> /bin/sh: Burne Shell - Is the default shell in  Unix environment
+
+ >> /bin/bash: Burne Again Shell - This is the default shell in the Linux Environment 	Using which a user can log in. 
+
+ >> /sbin/nologin: No Login or Non-Interactive shell Using which User Can not log in.
+
+ >> /bin/csh : C shell 
+
+ >> /bin/tcsh : Turbo C Shell 
+ 
+>> The shell Environment Details information is stored in  "/etc/shells".
+
+Shell Script:
+------------
+Shell scripts have several required constructs command tell the shell environment what to do and when to do it.
+
+It's programming language, and list of commands executed sequentially.
+
+All the scripts would have the .sh extension.
+
+shebang construct: For example: #!/bin/sh
+
+This tells the system that the commands that follow are to be executed by the Bourne shell.
+
+It's called a shebang because the # symbol is called a hash, and the ! symbol is called a bang.
+
+To create a script containing these commands, you put the shebang line first and then add the commands −
+
+#!/bin/bash
+pwd
+ls
+
+1.
+#!/bin/bash
+
+echo "What is your name?"
+#“read” command is used to obtain input from users
+read Name
+echo "Hello, $Name"
+
+echo “Please type your name”
+read name
+echo “Your name is” $name
+
+$./test.sh
+What is your name?
+Besanta
+Hello, Besanta
+$
+
+2.
+Varibale:
+
+Variables are defined as follows −
+variable_name=variable_value
+
+Name="Besanta"
+echo $Name
+
+Linux - Special Variables:
+--------------------------
+The $ character represents the process ID number, or PID, of the current shell −
+	$echo $$
+
+Number of special variables that you can use in your shell scripts −
+
+$0 : The filename of the current script.
+
+$# : The number of arguments supplied to a script.
+
+$* : All the arguments are double quoted. If a script receives two arguments, $* is equivalent to $1 $2.
+
+$@ : All the arguments are individually double quoted. 
+     If a script receives two arguments, $@ is equivalent to $1 $2.
+
+$? : The exit status of the last command executed.
+
+$$ : The process number of the current shell. For shell scripts, this is the process ID under which they are executing.
+
+$!: The process number of the last background command.
+
+Command-Line Arguments:
+-----------------------
+The command-line arguments $1, $2, $3, ...$9 are positional parameters,
+
+                       with $0 pointing to the actual command, program, shell script,
+ 
+                       or function and $1, $2, $3, ...$9 as the arguments to the command.
+
+Following script uses various special variables related to the command line −
+
+Example,
+
+#!/bin/bash
+
+echo "File Name: $0"
+
+echo "First Parameter : $1"
+echo "Second Parameter : $2"
+echo "Quoted Values: $@"
+echo "Quoted Values: $*"
+echo "Total Number of Parameters : $#"
+
+$./test.sh Besanta Technology
+File Name : ./test.sh
+First Parameter : Besanta
+Second Parameter : Technology
+Quoted Values: Besanta Technology
+Quoted Values: Besanta Technology
+Total Number of Parameters : 2
+
+Special Parameters $* and $@:
+-----------------------------
+There are special parameters that allow accessing all the command-line arguments,
+ $* and $@ both will act the same unless they are enclosed in double quotes, "".
+
+"$*" special parameter takes the entire list as one argument with spaces between 
+
+"$@" special parameter takes the entire list and separates it into separate arguments.
+
