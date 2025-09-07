@@ -1,0 +1,156 @@
+What is Storage?
+=================
+Storage is a mechanism that enables a computer to retain data, either temporarily or permanently.
+
+Storage devices such as flash drives and hard disks are a fundamental component of most digital devices
+
+since they allow users to preserve all kinds of information such as videos, documents, pictures, and raw data.
+
+Hard disks, Floppy diskettes, Tape drives, CD-ROM disks, Memory cards, Cloud drives
+
+External storage devices
+========================
+External HDDs and SSDs. Flash memory devices. Optical Storage Devices. Floppy Disks. Primary Storage: Random Access Memory (RAM)
+
+Secondary Storage: Hard Disk Drives (HDD) & Solid-State Drives (SSD)
+Hard Disk Drives (HDD)
+
+Solid-State Drives (SSD)
+
+>>> In enterprise storage, two concepts are at the core of most conversations: 
+Storage area networks (SAN) and Network-attached storage (NAS).
+
+Both options provide storage to clients across a network, which offers the huge benefit of removing individual servers as single points of failure. 
+
+Using one of these options also reduces the cost of individual clients, as there is no longer a need to have large amounts of local storage.
+
+Disk Partitioning:
+===============
+>>> Partitioning enables you to split your hard drive into multiple parts, where each part acts as its hard drive 
+
+and this is useful when you are installing multiple operating systems on the same machine.
+
+Note: Different types of harddisk are stored under "/dev".
+
+Ex: /dev/sda // 1st sata disk
+
+    /dev/sdb // 2nd stat disk 
+    
+    /dev/sdc // 3rd sata disk like wise 
+
+    /dev/vda // 1st virtual disk
+    
+    /dev/vdb // 2nd virtual disk 
+
+>> In a hard disk total we can create 15 partitions.
+
+>> In a hard disk we can create a maximum of 4 primary partitions but the recommended is 3 primary and 1 extended partition.
+
+>> Using Extended partitions we create again more logical partitions.
+
+>> Primary partitions are used to install OS or we can use them to store other data.
+
+	The primary partition ID is "83".
+
+>> Extended partition directly we can not use to store data and id for the extended partition is "5".
+
+>> The logical partition we can use to store data not installing os and id for the logical partition is "83".
+
+>> The partition ID for swap is "82".
+
+>> The partition ID for lvm is "8e".
+
+>> In a raw disk we can not store data unless we apply filesystem.
+
+>> There are different types of filesystem types available in Linux such as.
+
+  ->  ext2 
+  ->  ext3
+  ->  ext4
+  ->  xfs
+  ->  swap  // For swap partitioning 
+  ->  vfat //This type of filesystem is used in both Windows and Linux.
+  ->  btrfs
+  ->  iso9660 // To mount iso image we use iso9660 filesystem type .
+
+>> Windows types of the filesystem are:  NTFS, fat32 
+
+>> To manage disk partitioning we can use "fdisk" (or) parted command.
+
+>> To list disk partitioning 
+
+  # fdisk -l  
+
+    (or) 
+
+  # lsblk 
+
+>> To create disk partitioning.
+
+  # fdisk /dev/sdb 
+
+  >type "m" for help 
+
+  >n(create new partition)
+  >p (print partition table) 
+  >d(to delete partition)
+  >q(to quit without saving)
+  >w(save and exit)
+  >t(to change partition id)
+
+ # partprobe /dev/sdb //To update with kernel
+
+
+ >> To list disk partition 
+
+ # fdisk -l /dev/sdb 
+
+  (or)
+
+ # lsblk
+
+ >> To apply the filesystem to the disk partition "mkfs" command is used.
+
+ # mkfs -t ext4 /dev/sdb1 
+
+ # mkfs -t xfs /dev/sdb2
+
+>> To check whether the filesystem is applied to a disk partition or not "blkid" command is used.
+
+ # blkid // It will list all applied file systems.
+
+  (or)
+
+ # blkid /dev/sdb1    // inidivisually  to check filesystem applied or not 
+
+>> To store data in an applied filesystem we require a mount point and the mount point is any directory under "/" in Linux. 
+
+  # mkdir /redhat 
+
+To mount a filesystem temporarily "mount" command is used
+=========================================================
+
+  # mount -t ext4  /dev/sda1  /redhat 
+
+>> To check filesystem is mounted or not.
+
+  # mount // it will list all mounted filesystem 
+
+  # mount | grep -i "/redhat"
+
+       (or) 
+
+  # df -Th // to list all mounted filesystem 
+
+
+  # df -Th | grep -i "/xyz"
+
+  # cd /redhat 
+
+  # touch file{1..4000}.txt // this files used the filesystem space /dev/sda1 .
+
+>> To unmount the mount point temporary "umount" command is used
+
+ # umount <mountpoint>
+ 
+ #umount /redhat

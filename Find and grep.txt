@@ -1,0 +1,150 @@
+grep:
+-----
+The grep (global regular expression print) command is one of the most powerful and frequently used Linux command-line utilities.
+
+It searches for a particular expression pattern in a specified file.
+
+Syntax of grep command:
+
+	$ grep [options] PATTERN [FILE...]
+
+Options Description
+-c : This prints only a count of the lines that match a pattern
+-h : Display the matched lines, but do not display the filenames.
+-i : Ignores, case for matching
+-l : Displays list of filenames only.
+-n : Display the matched lines and their line numbers.
+-v : This prints out all the lines that do not match the pattern
+-e exp : Specifies expression with this option. Can use multiple times.
+-f file: Takes patterns from a file, one per line.
+-E : Treats pattern as an extended regular expression (ERE)
+-w : Match whole word
+-o : Print only the matched parts of a matching line,
+ with each such part on a separate output line.
+
+-A n : Prints searched line and n lines after the result.
+
+-B n : Prints searched line and n line before the result.
+
+-C n : Prints searched line and n lines after before the result.
+
+1. Case insensitive search: The -i option enables to search for a string case insensitively in the given file. It matches the words like “UNIX”, “Unix”, “Unix”. 
+ 
+$grep -i "UNix" file123.txt
+
+2. Displaying the count of number of matches : We can find the number of lines that matches the given string/pattern 
+ 
+$grep -c "unix" file123.txt
+
+3. Display the file names that match the pattern: We can just display the files that contain the given string/pattern. 
+ 
+$grep -l "unix" *
+or
+$grep -l "unix" f1.txt f2.txt f3.xt f4.txt
+
+4. Checking for the whole words in a file: By default, grep matches the given string/pattern even if it is found as a substring in a file. The -w option to grep makes it match only the whole words. 
+ 
+$ grep -w "unix" file123.txt
+
+5. Show the line number while displaying the output using grep -n : To show the line number of file with the line matched. 
+ 
+$ grep -n "unix" file123.txt
+
+7. Inverting the pattern match : You can display the lines that are not matched with the specified search string pattern using the -v option. 
+ 
+$ grep -v "unix" file123.txt
+
+Search for files
+----------------
+To search for a file name in a directory that contains a specific string in it, you can use grep in the following way:
+
+$ ls –l | grep –i <file_name>
+
+
+Find:
+-----
+The “find” command is used to find, filter, or search files and folders in your system according to user-specified conditions and perform several operations on them.
+
+Syntax:
+	find [path] [options] [expression]
+
+[path]: It defines the directory where to begin searching.
+
+[options]: It defines the criteria of filtering e.g. searching a file/folder by its name, permission, time, or date.
+
+[expression]: It defines what actions to perform with the file.
+
+. : For current directory name
+/ : For the root directory
+
+1.Finding a File by Name:
+
+	$ find . -name <any_file>.txt
+
+If you don’t remember the exact file name, the search can further be refined and make it case-insensitive by using the “-iname” in the place of “name”:
+
+	$ find . -iname <any_file>.txt
+
+2.Finding a File by Type:
+To find a file by its type, use the “-type” option with letters that are also known as descriptors such as 
+	“f” for files, 
+	“d” for directories, 
+	“l” for the symbolic link, 
+	“s” for sockets.
+
+To search all directories use:
+	$ find . -type d
+
+To search for files, use:
+	$ find . -type f
+
+3.Finding a File by the File Extension:
+	To search the file by pattern, e.g., file extension, such as displaying all the files with “.txt”, use 	the following command:
+  $ find . -name *.txt
+
+4.Finding and Deleting a File:
+	To search and delete a file, use the command below:
+  $ find . -iname mytextfile1.txt -exec rm {} \;
+
+5.Finding a File by Size:
+	The “find” command can also search a file by size. Simply use “-size” option along with its descriptors 	such as 
+		“b” for 512 Kb blocks, 
+		“c” for bytes, 
+		“k” for kilobytes, 
+		“M” and “G” for megabytes and gigabytes respectively
+	$ find . -type f -size -1024c
+	$ find . -type f -size 1M
+For all the files that are greater than 1Mb,
+	$ find . -type f -size +1M
+A range of size can also be defined, 
+	$ find . –type f -size +1M -size 10M
+
+6.Finding Files by Permission:
+	To search a file by permission, we will use the “-perm” option, then permission code,
+  $ find . -perm 664
+
+7.Find a Text Within Text Files
+	To find text in multiple text files in your system,
+  $ find . -type f -name *.txt -exec grep ‘Hello’ {} \;
+
+How to find and delete a file with confirmation:
+	$ find . -name sample.txt -exec rm -i {} \; 
+When this command is entered, a prompt will come for confirmation, if you want to delete sample.txt or not. 
+if you enter ‘Y/y’ it will delete the file.
+
+Search text within multiple files:
+$ find ./ -type f -name "*.txt" -exec grep 'Hello'  {} \;
+This command print lines which have ‘Hello’ in them and ‘-type f’ specifies the input type is a file. 
+
+8.Finding a File by Modification Date and Time:
+	To access a file by its last modification,
+
+  $find . -type f -iname *.txt -mmin +10
+
+9.Search for empty files and directories:
+
+	$ find . -empty
+
+
+
+

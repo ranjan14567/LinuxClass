@@ -1,0 +1,89 @@
+Compression:
+------------
+Compression: Reducing the size of the actual file size of directory/folder size.
+
+ZIP and GZIP are two very popular methods of compressing files.
+
+1.ZIP is a compression and file packaging utility for Unix.
+
+2.gzip command compresses files. Each single file is compressed into a single file.
+
+GZIP is much better compared to ZIP, in terms of compression, especially when compressing a huge number of files.
+
+Syntax :
+zip [options] zipfile files_list
+
+gzip [Options] [filenames]
+
+Syntax for  Creating a zip file:
+$zip myfile.zip filename.txt
+
+#gzip <file_name> or gzip -v <file_name>
+
+$unzip myfile.zip
+
+$gunzip <file_name>
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Archieve:
+---------
+Archieve: Collecting file & folder into one file.
+
+What is an Archive file? 
+Archive files are used to collect multiple data files together into a single file for easier portability and storage, or simply to compress files to use less storage space. 
+
+It is used to create Archive and extract the Archive files. 
+
+tar command in Linux is one of the important command which provides archiving functionality in Linux.
+
+In Linux Environment "tar" is a command line tool
+
+	tar --Tape Archieve.
+
+We can use Linux tar command to create compressed or uncompressed Archive files and also maintain and modify them.
+
+Archieve, there are 2 term
+	i)Take the Backup
+
+	ii)Reduce the actual size of the file and storing in a location it's depend with the less space.
+
+Syntax:
+------ 
+tar [options] [archive-file] [file or directory to be archived]
+
+-c 		: Create a new archive
+-v 		: Verbose output
+-f file.tar.gz 	: Use archive file
+-x		: extract
+-z 		: Filter the archive through gzip
+
+#touch file123.txt //Create a file
+
+How to check size of the file?
+
+#ls -lrth file123.txt 
+	h --human readable format
+
+Another way need to check,
+
+#du -sh file123.txt
+
+#tar --help | less   --List of options see
+
+#touch newfile{1..5}.txt
+
+#ll -h newfile*
+
+#tar -cvf <tar_file_name.tar> <which files are going to tar i,e newfile*>
+
+#tar -cvzf <file.tar.gz> <file.tar>
+
+#tar -cvf file.tar.gz
+
+#tar -xvf file.tar
+
+---------------------------------------------------
+
+
+
